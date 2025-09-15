@@ -29,7 +29,6 @@ jobs:
           gradle-${{ runner.os }}-
 
     - name: Build and Run Tests with H2
-      working-directory: ./backend
       run: ./gradlew clean test --no-daemon
       env:
         SPRING_PROFILES_ACTIVE: test
