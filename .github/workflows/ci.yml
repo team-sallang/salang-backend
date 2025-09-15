@@ -18,8 +18,17 @@ jobs:
         java-version: '17'
         distribution: 'temurin' 
 
-    - name: Build with Gradle
-      run: ./gradlew clean build --no-daemon
+    - name: Cache Gradle packages
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          gradle-${{ runner.os }}-
 
-    - name: Run tests
-      run: ./gradlew test
+    - name: Build and Run Tests with H2
+      run: ./gradlew clean test --no-daemon
+      env:
+        SPRING_PROFILES_ACTIVE: test

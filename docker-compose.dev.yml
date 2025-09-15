@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    ports:
+      - "8080:8080"
+    networks:
+      - app-tier
+  db:
+    image: supabase/postgres:15.14.1.003
+    container_name: supabase-postgres
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-tier
+
+#  realtime:
+#    image: supabase/realtime
+#    container_name: supabase-realtime
+#    restart: always
+#    env_file:
+#      - .env
+#    ports:
+#      - "4000:4000"
+#    depends_on:
+#      - db
+#    networks:
+#      - app-tier
+
+volumes:
+  postgres-data:
+    driver: local
+
+networks:
+  app-tier:
+    driver: bridge
