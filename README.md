@@ -34,4 +34,5 @@ docker-compose -f docker-compose.dev.yml down -v
 - 추후 환경 변수가 추가된다면, .env파일에 추가한 뒤 팀원들에게 공유
 
 ### Test
-H2 인메모리 데이터베이스를 자동으로 사용
+- H2 인메모리 데이터베이스를 자동으로 사용
+- @SpringBootTest를 사용한다면 @ActiveProfiles("test")를 붙여주세요
