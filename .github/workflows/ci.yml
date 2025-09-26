@@ -42,9 +42,9 @@ jobs:
         restore-keys: |
           gradle-${{ runner.os }}-
 
-    - name: Build and Run Tests with H2
+    - name: Build and Run Tests
       run: ./gradlew clean test --no-daemon
       env:
-        SPRING_DATASOURCE_TEST_URL: jdbc:postgresql://postgres:5432/salang
+        SPRING_DATASOURCE_TEST_URL: jdbc:postgresql://localhost:5432/salang
         SPRING_DATASOURCE_TEST_USERNAME: postgres
         SPRING_DATASOURCE_TEST_PASSWORD: password
