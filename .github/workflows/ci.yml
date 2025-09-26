@@ -7,6 +7,20 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: salang
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
     - name: Checkout repository
@@ -31,4 +45,6 @@ jobs:
     - name: Build and Run Tests with H2
       run: ./gradlew clean test --no-daemon
       env:
-        SPRING_PROFILES_ACTIVE: test
+        SPRING_DATASOURCE_TEST_URL: jdbc:postgresql://postgres:5432/salang
+        SPRING_DATASOURCE_TEST_USERNAME: postgres
+        SPRING_DATASOURCE_TEST_PASSWORD: password
