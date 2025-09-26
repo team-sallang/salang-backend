@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  db-test:
+    image: postgres:16
+    container_name: pg_test
+    env_file: .env                 # POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB 가져옴
+    ports:
+      - "5433:5432"                # 로컬 DB와 충돌 방지용 포트
+    volumes:
+      - pg_test_data:/var/lib/postgresql/data
+    networks:
+      - test-net
+
+  app-test:
+    build: .
+    env_file: .env                 # SPRING_DATASOURCE_* 환경변수 가져옴
+    depends_on:
+      - db-test
+    command: ./gradlew test         # CI/CD용, IDE에서 실행 시 생략 가능
+    networks:
+      - test-net
+
+volumes:
+  pg_test_data:
+
+networks:
+  test-net:
