@@ -3,7 +3,7 @@ version: '3.9'
 services:
   db-test:
     image: postgres:16
-    container_name: pg_test
+    container_name: db_test
     env_file: .env                 # POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB 가져옴
     ports:
       - "5433:5432"                # 로컬 DB와 충돌 방지용 포트
