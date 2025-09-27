@@ -44,7 +44,7 @@ jobs:
           gradle-${{ runner.os }}-
 
     - name: Print environment variables for debugging # 디버깅 단계 추가
-      run: echo "Test URL is ${{ env.SPRING_DATASOURCE_TEST_URL }}"
+      run: echo "Test DB password is ${{ secrets.POSTGRES_PASSWORD }}"
 
     - name: Build and Run Tests
       run: ./gradlew clean test --no-daemon
