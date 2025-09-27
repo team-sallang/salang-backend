@@ -43,11 +43,8 @@ jobs:
         restore-keys: |
           gradle-${{ runner.os }}-
 
-    - name: Print environment variables for debugging # 디버깅 단계 추가
-      run: echo "Test DB password is ${{ secrets.POSTGRES_PASSWORD }}"
-
     - name: Build and Run Tests
-      run: ./gradlew clean test --no-daemon
+      run: ./gradlew clean test --info --no-daemon
       env:
         SPRING_DATASOURCE_TEST_URL: ${{ secrets.SPRING_DATASOURCE_TEST_LOCAL_URL }}
         SPRING_DATASOURCE_TEST_USERNAME: ${{ secrets.SPRING_DATASOURCE_TEST_USERNAME }}
