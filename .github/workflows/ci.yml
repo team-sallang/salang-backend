@@ -12,7 +12,7 @@ jobs:
       postgres:
         image: postgres:14
         env:
-          POSTGRES_USER: postgres
+          POSTGRES_USER: ${{ secrets.SPRING_DATASOURCE_TEST_USERNAME }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_DB: salang
         ports:
@@ -49,6 +49,6 @@ jobs:
     - name: Build and Run Tests
       run: ./gradlew clean test --no-daemon
       env:
-        SPRING_DATASOURCE_TEST_URL: jdbc:postgresql://postgres:5432/salang
-        SPRING_DATASOURCE_TEST_USERNAME: postgres
+        SPRING_DATASOURCE_TEST_URL: ${{ secrets.SPRING_DATASOURCE_TEST_URL }}
+        SPRING_DATASOURCE_TEST_USERNAME: ${{ secrets.SPRING_DATASOURCE_TEST_USERNAME }}
         SPRING_DATASOURCE_TEST_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
