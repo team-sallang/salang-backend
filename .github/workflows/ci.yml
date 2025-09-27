@@ -43,9 +43,12 @@ jobs:
         restore-keys: |
           gradle-${{ runner.os }}-
 
+    - name: Print environment variables for debugging # 디버깅 단계 추가
+      run: echo "Test URL is ${{ env.SPRING_DATASOURCE_TEST_URL }}"
+
     - name: Build and Run Tests
       run: ./gradlew clean test --no-daemon
       env:
-        SPRING_DATASOURCE_TEST_URL: jdbc:postgresql://localhost:5432/salang
+        SPRING_DATASOURCE_TEST_URL: jdbc:postgresql://postgres:5432/salang
         SPRING_DATASOURCE_TEST_USERNAME: postgres
         SPRING_DATASOURCE_TEST_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
