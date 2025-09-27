@@ -7,13 +7,13 @@ on:
     branches: [ setting/SL-29 ]
 jobs:
   ci:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     services:
       postgres:
-        image: postgres:16
+        image: postgres:14
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_DB: salang
         ports:
           - 5432:5432
@@ -25,7 +25,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up JDK 17
       uses: actions/setup-java@v3
@@ -43,17 +43,9 @@ jobs:
         restore-keys: |
           gradle-${{ runner.os }}-
 
-    - name: Download wait-for-it.sh
-      run: |
-        curl -sSLo wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
-        chmod +x wait-for-it.sh
-
-    - name: Wait for PostgreSQL
-      run: ./wait-for-it.sh postgres:5432 --timeout=60 --strict -- echo "PostgreSQL is up"
-
     - name: Build and Run Tests
       run: ./gradlew clean test --no-daemon
       env:
         SPRING_DATASOURCE_TEST_URL: jdbc:postgresql://postgres:5432/salang
         SPRING_DATASOURCE_TEST_USERNAME: postgres
-        SPRING_DATASOURCE_TEST_PASSWORD: password
+        SPRING_DATASOURCE_TEST_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
