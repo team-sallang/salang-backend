@@ -7,21 +7,12 @@
 - Docker & Docker Compose
 
 ### Docker 실행 및 종료
-```bash
-// 실행
-docker-compose -f docker-compose.dev.yml up --build -d
-
-// 종료(볼륨 삭제 X)
-docker-compose -f docker-compose.dev.yml down
-
-// 종료(볼륨도 함께 삭제)
-docker-compose -f docker-compose.dev.yml down -v
-```
+- Makefile 참고
 
 ## 🛠 Tech Stack
 
 - **Backend**: Java 17, Spring Boot 3.4.9
-- **Database**: PostgreSQL (운영), H2 (테스트)
+- **Database**: PostgreSQL 
 - **ORM**: Spring Data JPA, Hibernate  
 - **Documentation**: SpringDoc OpenAPI (Swagger)
 - **Build Tool**: Gradle
@@ -34,5 +25,6 @@ docker-compose -f docker-compose.dev.yml down -v
 - 추후 환경 변수가 추가된다면, .env파일에 추가한 뒤 팀원들에게 공유
 
 ### Test
-- H2 인메모리 데이터베이스를 자동으로 사용
-- @SpringBootTest를 사용한다면 @ActiveProfiles("test")를 붙여주세요
+- 테스트용 도커 컴포즈 파일을 활용해 db 서버를 띄운 다음 테스트 진행
+  - Makefile을 통해 생성된 단축어 활용
+- @SpringBootTest를 사용한다면 반드시 @ActiveProfiles("test")를 붙여주세요
