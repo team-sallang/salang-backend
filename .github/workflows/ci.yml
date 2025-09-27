@@ -3,7 +3,8 @@ name: ⚙️ CI-Pipeline
 on:
   pull_request:
     branches: [ main ]
-
+  push:
+    branches: [ setting/SL-29 ]
 jobs:
   ci:
     runs-on: ubuntu-latest
