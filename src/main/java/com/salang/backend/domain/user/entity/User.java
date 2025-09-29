@@ -1,4 +1,4 @@
-package com.salang.backend.domain.Member.entity;
+package com.salang.backend.domain.user.entity;
 
 import com.salang.backend.global.BaseEntity;
 import jakarta.persistence.Column;
@@ -20,14 +20,14 @@ import org.hibernate.annotations.SQLRestriction;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @SQLRestriction("is_deleted = false") // 이걸 붙여야 소프트 딜리트 실행, delete 쿼리 발생 시 update 쿼리로 대체
-@Table(name = "members")
-public class Member extends BaseEntity {
+@Table(name = "users")
+public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
+    @Column(name = "user_id")
     private Long id;
 
-    @Column(name = "member_name")
+    @Column(name = "user_name")
     private String name;
 }
