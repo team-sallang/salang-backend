@@ -89,13 +89,14 @@ public class ErrorResponse {
         }
 
         private static List<FieldError> of(final Set<ConstraintViolation<?>> constraintViolations) {
-            final List<ConstraintViolation<?>> lists = new ArrayList<>(constraintViolations);
-            return lists.stream()
+            return constraintViolations.stream()
                     .map(error -> {
                         final String invalidValue =
                                 error.getInvalidValue() == null ? "" : error.getInvalidValue().toString();
-                        final int index = error.getPropertyPath().toString().indexOf(".");
-                        final String propertyPath = error.getPropertyPath().toString().substring(index + 1);
+
+                        final String fullPath = error.getPropertyPath().toString();
+                        final int index = fullPath.indexOf(".");
+                        final String propertyPath = index >= 0 ? fullPath.substring(index + 1) : fullPath;
                         return new FieldError(propertyPath, invalidValue, error.getMessage());
                     })
                     .collect(Collectors.toList());
