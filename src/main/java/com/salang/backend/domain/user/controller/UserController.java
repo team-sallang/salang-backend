@@ -5,11 +5,14 @@ import static com.salang.backend.global.result.ResultCode.*;
 import com.salang.backend.domain.user.dto.request.EditNicknameRequest;
 import com.salang.backend.domain.user.dto.request.EditRegionAndHobbyRequest;
 import com.salang.backend.domain.user.dto.response.UserProfileResponse;
+import com.salang.backend.domain.user.entity.Region;
 import com.salang.backend.domain.user.service.UserService;
 import com.salang.backend.global.result.ResultCode;
 import com.salang.backend.global.result.ResultResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
+import java.util.Arrays;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,5 +56,15 @@ public class UserController {
     public ResponseEntity<ResultResponse> editRegionAndHobby(@Valid @RequestBody EditRegionAndHobbyRequest editRegionAndHobbyRequest){
         userService.editRegionAndHobby(editRegionAndHobbyRequest);
         return ResponseEntity.ok(ResultResponse.of(EDIT_REGION_AND_HOBBY_SUCCESS));
+    }
+
+    @Operation(
+            summary = "지역 카탈로그 조회",
+            description = "선택 가능한 지역 목록을 반환합니다."
+    )
+    @GetMapping("/regions")
+    public ResponseEntity<ResultResponse> getRegions(){
+        List<Region> regionList = Arrays.asList(Region.values());
+        return ResponseEntity.ok(ResultResponse.of(ResultCode.GET_REGIONS_SUCCESS, regionList));
     }
 }

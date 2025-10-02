@@ -2,9 +2,7 @@ package com.salang.backend.domain.user.dto.response;
 
 
 import com.salang.backend.domain.user.entity.Hobby;
-import com.salang.backend.domain.user.entity.Region;
 import com.salang.backend.domain.user.entity.User;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -33,7 +31,7 @@ public class UserProfileResponse {
     public static UserProfileResponse from(User user, List<Hobby> hobbies) {
         return UserProfileResponse.builder()
                 .nickname(user.getNickname())
-                .region(user.getRegion().getDisplayName())
+                .region(user.getRegion().getLabel())
                 .hobbies(hobbies.stream().map(Hobby::getName).toList())
                 .profileImageUrl(
                         (user.getProfileImage()==null || user.getProfileImage().isEmpty())
