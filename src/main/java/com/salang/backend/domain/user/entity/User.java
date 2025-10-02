@@ -78,4 +78,8 @@ public class User extends BaseEntity {
     public void updateNickname(String nickname){
         this.nickname = nickname;
     }
+
+    public void updateRegion(Region region) {
+        this.region = region;
+    }
 }

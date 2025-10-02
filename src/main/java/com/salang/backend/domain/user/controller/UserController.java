@@ -3,6 +3,7 @@ package com.salang.backend.domain.user.controller;
 import static com.salang.backend.global.result.ResultCode.*;
 
 import com.salang.backend.domain.user.dto.request.EditNicknameRequest;
+import com.salang.backend.domain.user.dto.request.EditRegionAndHobbyRequest;
 import com.salang.backend.domain.user.dto.response.UserProfileResponse;
 import com.salang.backend.domain.user.service.UserService;
 import com.salang.backend.global.result.ResultCode;
@@ -42,5 +43,15 @@ public class UserController {
     public ResponseEntity<ResultResponse> editNickname(@Valid @RequestBody EditNicknameRequest editNicknameRequest){
         userService.editNickname(editNicknameRequest);
         return ResponseEntity.ok(ResultResponse.of(EDIT_NICKNAME_SUCCESS));
+    }
+
+    @Operation(
+            summary = "지역/취미 수정",
+            description = "지역·취미를 한 번에 부분 수정"
+    )
+    @PatchMapping
+    public ResponseEntity<ResultResponse> editRegionAndHobby(@Valid @RequestBody EditRegionAndHobbyRequest editRegionAndHobbyRequest){
+        userService.editRegionAndHobby(editRegionAndHobbyRequest);
+        return ResponseEntity.ok(ResultResponse.of(EDIT_REGION_AND_HOBBY_SUCCESS));
     }
 }

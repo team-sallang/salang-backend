@@ -32,7 +32,8 @@ public enum ErrorCode {
 
     // Hobby
     HOBBY_NOT_FOUND(404, "H001", "취미를 찾을 수 없습니다."),
-;
+    INVALID_HOBBY_SIZE(400, "H002", "취미의 개수는 3개를 넘을 수 없습니다."),
+    DUPLICATE_HOBBY(400, "H003", "중복된 취미를 등록할 수 없습니다.");
     private final int status;
     private final String code;
     private final String message;
