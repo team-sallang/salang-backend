@@ -26,9 +26,13 @@ public enum ErrorCode {
     ENTITY_TYPE_INVALID(500, "G009", "올바르지 않은 entity type 입니다."),
     FILTER_MUST_RESPOND(500, "G010", "필터에서 처리해야 할 요청이 Controller에 접근하였습니다."),
 
+    // User
+    USER_NOT_FOUND(404, "U001", "로그인 유저를 찾을 수 없습니다."),
+    USER_NICKNAME_ALREADY_EXIST(400, "U002", "이미 사용중인 닉네임입니다."),
 
-    ;
-
+    // Hobby
+    HOBBY_NOT_FOUND(404, "H001", "취미를 찾을 수 없습니다."),
+;
     private final int status;
     private final String code;
     private final String message;

@@ -74,4 +74,8 @@ public class User extends BaseEntity {
 
     @Column(name = "ci_hmac", nullable = false)
     private String ciHmac;
+
+    public void updateNickname(String nickname){
+        this.nickname = nickname;
+    }
 }

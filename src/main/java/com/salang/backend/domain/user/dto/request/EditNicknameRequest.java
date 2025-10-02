@@ -1,0 +1,15 @@
+package com.salang.backend.domain.user.dto.request;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import org.hibernate.validator.constraints.Length;
+
+@Getter
+public class EditNicknameRequest {
+
+    @NotBlank(message = "닉네임을 입력해주세요")
+    @Length(min = 2, max = 20, message = "닉네임은 2문자 이상 20문자 이하여야 합니다")
+    private String nickname;
+}

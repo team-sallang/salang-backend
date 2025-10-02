@@ -15,11 +15,9 @@ import lombok.Getter;
 public enum ResultCode {
 
     // User
-    GET_USERPROFILE_SUCCESS(200, "U001", "회원 프로필을 조회하였습니다."),
+    GET_USER_PROFILE_SUCCESS(200, "U001", "회원 프로필을 조회하였습니다."),
     EDIT_PROFILE_IMAGE_SUCCESS(200, "U002", "회원 프로필 사진을 수정하였습니다."),
-
-
-    ;
+    EDIT_NICKNAME_SUCCESS(200, "U003", "회원 닉네임을 수정하였습니다.");
 
     private final int status;
     private final String code;
