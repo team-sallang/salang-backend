@@ -26,7 +26,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserHobbyRepository userHobbyRepository;
-    private final HobbyRepository hobbyRepository;
+    private final HobbyService hobbyService;
     private final AuthService authService;
 
     public UserProfileResponse getProfile() {
@@ -61,29 +61,6 @@ public class UserService {
         loginUser.updateRegion(editRegionAndHobbyRequest.getRegion());
 
         // 취미 업데이트
-        List<Long> hobbyIds = editRegionAndHobbyRequest.getHobbyIds();
-
-        userHobbyRepository.deleteAllByUserId(loginUser.getId()); // 기존 취미 제거
-
-        if (hobbyIds.isEmpty()) { // 빈 배열이 넘어올 시 바로 마무리
-            return;
-        }
-
-        if (hobbyIds.size() > 3) { // 취미가 3개 이상 선택된 경우 예외처리
-            throw new BusinessException(ErrorCode.INVALID_HOBBY_SIZE);
-        }
-
-        if (hobbyIds.size()!=new HashSet<>(hobbyIds).size()) { // 취미 중복된 경우 예외 처리
-            throw new BusinessException(ErrorCode.DUPLICATE_HOBBY);
-        }
-
-        // 새 취미 추가
-        List<UserHobby> newUserHobbies = hobbyIds.stream()
-                .map(id -> UserHobby.builder()
-                        .user(loginUser)
-                        .hobby(hobbyRepository.getReferenceById(id))
-                        .build())
-                .toList();
-        userHobbyRepository.saveAll(newUserHobbies);
+        hobbyService.updateUserHobbies(loginUser, editRegionAndHobbyRequest.getHobbyIds());
     }
 }
