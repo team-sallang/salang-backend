@@ -11,9 +11,10 @@ public class ConsentResponse {
 
     private final String type;
     private final String version;
+    private final boolean agreed;
     private final LocalDateTime agreedAt;
 
-    public static ConsentResponse from(String type, String version, LocalDateTime agreedAt){
-        return new ConsentResponse(type,version,agreedAt);
+    public static ConsentResponse from(String type, String version, boolean agreed, LocalDateTime agreedAt){
+        return new ConsentResponse(type,version,agreed,agreedAt);
     }
 }

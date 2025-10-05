@@ -14,7 +14,8 @@ public class ConsentsResponse {
 
     public static ConsentsResponse of(List<Consent> consents){
         return new ConsentsResponse(
-          consents.stream().map(c -> ConsentResponse.from(c.getType(), c.getVersion(), c.getAgreedAt())).toList()
+          consents.stream()
+                  .map(c -> ConsentResponse.from(c.getType(), c.getVersion(), c.isAgreed(), c.getAgreedAt())).toList()
         );
     }
 }

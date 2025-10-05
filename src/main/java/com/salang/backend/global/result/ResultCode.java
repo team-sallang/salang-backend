@@ -24,7 +24,8 @@ public enum ResultCode {
     DELETE_USER_SUCCESS(200, "U007", "회원을 삭제하였습니다."),
 
     // Consent
-    GET_CONSENTS_SUCCESS(200, "C001", "회원의 약관 동의 내역을 조회하였습니다.");
+    GET_CONSENTS_SUCCESS(200, "C001", "회원의 약관 동의 내역을 조회하였습니다."),
+    UPDATE_CONSENT_SUCCESS(200, "C002", "회원의 약관 동의/철회를 성공하였습니다.");
 
     private final int status;
     private final String code;

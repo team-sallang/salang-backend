@@ -2,6 +2,8 @@ package com.salang.backend.domain.consents.repository;
 
 import com.salang.backend.domain.consents.entity.Consent;
 import java.util.List;
+import java.util.Optional;
+import javax.swing.text.html.Option;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface ConsentRepository extends JpaRepository<Consent, Long> {
 
     List<Consent> findByUserId(Long userId);
+
+    Optional<Consent> findByUserIdAndTypeAndVersion(Long id, String type, String version);
 
 }

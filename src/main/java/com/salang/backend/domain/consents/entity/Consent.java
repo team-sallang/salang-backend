@@ -49,4 +49,12 @@ public class Consent {
 
     @Column(name = "agreed_at", nullable = false)
     private LocalDateTime agreedAt;
+
+    public void updateAgreed(boolean agreed) {
+        this.agreed = agreed;
+    }
+
+    public void updateAgreedAt() {
+        this.agreedAt = LocalDateTime.now();
+    }
 }

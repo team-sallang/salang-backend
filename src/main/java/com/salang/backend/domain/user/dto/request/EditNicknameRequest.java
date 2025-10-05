@@ -1,12 +1,13 @@
 package com.salang.backend.domain.user.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.hibernate.validator.constraints.Length;
 
 @Getter
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class EditNicknameRequest {
 
     @NotBlank(message = "닉네임을 입력해주세요")
