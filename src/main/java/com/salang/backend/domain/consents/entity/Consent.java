@@ -10,23 +10,23 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.SQLRestriction;
 
 @Entity
 @Builder
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@SQLRestriction("deleted_at IS NULL")
-@SQLDelete(sql = "UPDATE consents SET deleted_at = now() WHERE consent_id = ?")
-@Table(name = "consents")
+@Table(name = "consents",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"user_id", "type", "version"})
+        })
 public class Consent {
 
     @Id
@@ -38,11 +38,15 @@ public class Consent {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(name = "type", nullable = false, length = 50)
     private String type;
 
+    @Column(name = "version", nullable = false, length = 20)
     private String version;
 
+    @Column(nullable = false)
     private boolean agreed;
 
-    private LocalDateTime agreed_at;
+    @Column(name = "agreed_at", nullable = false)
+    private LocalDateTime agreedAt;
 }
