@@ -1,5 +1,6 @@
 package com.salang.backend.domain.user.service;
 
+import com.salang.backend.domain.user.dto.response.HobbiesResponse;
 import com.salang.backend.domain.user.entity.User;
 import com.salang.backend.domain.user.entity.UserHobby;
 import com.salang.backend.domain.user.repository.HobbyRepository;
@@ -42,5 +43,9 @@ public class HobbyService {
                         .build())
                 .toList();
         userHobbyRepository.saveAll(newUserHobbies);
+    }
+
+    public HobbiesResponse getHobbies() {
+        return HobbiesResponse.of(hobbyRepository.findAll());
     }
 }
