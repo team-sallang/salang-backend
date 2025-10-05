@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -64,7 +65,17 @@ public class UserController {
     )
     @GetMapping("/regions")
     public ResponseEntity<ResultResponse> getRegions(){
-        List<Region> regionList = Arrays.asList(Region.values());
+        final List<Region> regionList = Arrays.asList(Region.values());
         return ResponseEntity.ok(ResultResponse.of(ResultCode.GET_REGIONS_SUCCESS, regionList));
+    }
+
+    @Operation(
+            summary = "회원 탈퇴",
+            description = "회원이 서비스를 탈퇴합니다."
+    )
+    @DeleteMapping
+    public ResponseEntity<ResultResponse> deleteUser(){
+        userService.deleteUser();
+        return ResponseEntity.ok(ResultResponse.of(ResultCode.DELETE_USER_SUCCESS));
     }
 }

@@ -7,14 +7,10 @@ import com.salang.backend.domain.user.dto.response.UserProfileResponse;
 import com.salang.backend.domain.user.entity.Hobby;
 import com.salang.backend.domain.user.entity.User;
 import com.salang.backend.domain.user.entity.UserHobby;
-import com.salang.backend.domain.user.repository.HobbyRepository;
 import com.salang.backend.domain.user.repository.UserHobbyRepository;
 import com.salang.backend.domain.user.repository.UserRepository;
 import com.salang.backend.global.auth.AuthService;
-import com.salang.backend.global.error.ErrorCode;
-import com.salang.backend.global.error.exception.BusinessException;
 import jakarta.validation.Valid;
-import java.util.HashSet;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -62,5 +58,11 @@ public class UserService {
 
         // 취미 업데이트
         hobbyService.updateUserHobbies(loginUser, editRegionAndHobbyRequest.getHobbyIds());
+    }
+
+    @Transactional
+    public void deleteUser() {
+        User loginUser = authService.getLoginUser();
+        userRepository.deleteById(loginUser.getId());
     }
 }
