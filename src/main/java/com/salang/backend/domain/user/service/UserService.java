@@ -1,6 +1,6 @@
 package com.salang.backend.domain.user.service;
 
-import com.salang.backend.domain.user.NicknameAlreadyExistException;
+import com.salang.backend.domain.user.exception.NicknameAlreadyExistException;
 import com.salang.backend.domain.user.dto.request.EditNicknameRequest;
 import com.salang.backend.domain.user.dto.request.EditRegionAndHobbyRequest;
 import com.salang.backend.domain.user.dto.response.UserProfileResponse;

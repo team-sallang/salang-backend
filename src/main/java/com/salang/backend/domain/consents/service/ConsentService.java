@@ -6,7 +6,6 @@ import com.salang.backend.domain.consents.entity.Consent;
 import com.salang.backend.domain.consents.repository.ConsentRepository;
 import com.salang.backend.domain.user.entity.User;
 import com.salang.backend.global.auth.AuthService;
-import jakarta.validation.Valid;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

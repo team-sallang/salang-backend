@@ -1,4 +1,4 @@
-package com.salang.backend.domain.user;
+package com.salang.backend.domain.user.exception;
 
 import com.salang.backend.global.error.ErrorCode;
 import com.salang.backend.global.error.exception.BusinessException;
