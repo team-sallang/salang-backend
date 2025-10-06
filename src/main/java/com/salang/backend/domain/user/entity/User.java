@@ -81,4 +81,8 @@ public class User extends BaseEntity {
     public void updateRegion(Region region) {
         this.region = region;
     }
+
+    public void updateProfileImage(String profileImageUrl){
+        this.profileImage = profileImageUrl;
+    }
 }

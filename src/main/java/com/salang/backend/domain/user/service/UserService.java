@@ -10,11 +10,13 @@ import com.salang.backend.domain.user.entity.UserHobby;
 import com.salang.backend.domain.user.repository.UserHobbyRepository;
 import com.salang.backend.domain.user.repository.UserRepository;
 import com.salang.backend.global.auth.AuthService;
+import com.salang.backend.infra.S3Uploader;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +26,7 @@ public class UserService {
     private final UserHobbyRepository userHobbyRepository;
     private final HobbyService hobbyService;
     private final AuthService authService;
+    private final S3Uploader s3Uploader;
 
     public UserProfileResponse getProfile() {
         User loginUser = authService.getLoginUser();
@@ -64,5 +67,13 @@ public class UserService {
     public void deleteUser() {
         User loginUser = authService.getLoginUser();
         userRepository.deleteById(loginUser.getId());
+    }
+
+    @Transactional
+    public String updateProfileImage(MultipartFile file) {
+        User loginUser = authService.getLoginUser();
+        String profileImageUrl = s3Uploader.updateProfileImage(file, loginUser.getProfileImage());
+        loginUser.updateProfileImage(profileImageUrl);
+        return profileImageUrl;
     }
 }

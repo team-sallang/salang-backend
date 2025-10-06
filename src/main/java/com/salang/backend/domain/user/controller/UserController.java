@@ -18,9 +18,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -57,6 +61,16 @@ public class UserController {
     public ResponseEntity<ResultResponse> editRegionAndHobby(@Valid @RequestBody EditRegionAndHobbyRequest editRegionAndHobbyRequest){
         userService.editRegionAndHobby(editRegionAndHobbyRequest);
         return ResponseEntity.ok(ResultResponse.of(EDIT_REGION_AND_HOBBY_SUCCESS));
+    }
+
+    @Operation(
+            summary = "프로필 사진 업로드/변경",
+            description = "프로필 사진을 S3에 업로드 후 변경"
+    )
+    @PostMapping("/photo")
+    public ResponseEntity<ResultResponse> updateProfileImage(@RequestPart("profileImage") MultipartFile profileImage) {
+        final String profileImageUrl = userService.updateProfileImage(profileImage);
+        return ResponseEntity.ok(ResultResponse.of(ResultCode.UPDATE_PROFILE_IMAGE_SUCCESS, profileImageUrl));
     }
 
     @Operation(

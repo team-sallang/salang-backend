@@ -22,10 +22,15 @@ public enum ResultCode {
     GET_REGIONS_SUCCESS(200, "U005", "지역 목록을 조회하였습니다."),
     GET_HOBBIES_SUCCESS(200, "U006", "취미 목록을 조회하였습니다."),
     DELETE_USER_SUCCESS(200, "U007", "회원을 삭제하였습니다."),
+    UPDATE_PROFILE_IMAGE_SUCCESS(200, "U008", "프로필 사진을 추가/변경 하였습니다."),
+
 
     // Consent
     GET_CONSENTS_SUCCESS(200, "C001", "회원의 약관 동의 내역을 조회하였습니다."),
-    UPDATE_CONSENT_SUCCESS(200, "C002", "회원의 약관 동의/철회를 성공하였습니다.");
+    UPDATE_CONSENT_SUCCESS(200, "C002", "회원의 약관 동의/철회를 성공하였습니다."),
+
+
+    ;
 
     private final int status;
     private final String code;
