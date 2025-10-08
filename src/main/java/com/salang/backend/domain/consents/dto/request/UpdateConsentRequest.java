@@ -7,7 +7,7 @@ import lombok.Getter;
 import org.hibernate.validator.constraints.Length;
 
 @Getter
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class UpdateConsentRequest {
 
     @NotNull(message = "type은 null일 수 없습니다")

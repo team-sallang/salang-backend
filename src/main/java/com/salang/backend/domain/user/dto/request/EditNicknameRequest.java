@@ -7,7 +7,7 @@ import lombok.Getter;
 import org.hibernate.validator.constraints.Length;
 
 @Getter
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class EditNicknameRequest {
 
     @NotBlank(message = "닉네임을 입력해주세요")
