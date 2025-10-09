@@ -106,6 +106,19 @@ class HobbyServiceTest {
         verify(userHobbyRepository).saveAll(any());
     }
 
+    @Test
+    @DisplayName("존재하지 않는 취미 ID로 업데이트 시 예외가 발생한다")
+    void updateUserHobbies_WithNonExistentHobbyId_ThrowsException() {
+        // given
+        List<Long> hobbyIds = List.of(999L);
+        given(hobbyRepository.findById(999L)).willReturn(java.util.Optional.empty());
+
+        // when & then
+        assertThatThrownBy(() -> hobbyService.updateUserHobbies(testUser, hobbyIds))
+                .isInstanceOf(BusinessException.class);
+        verify(userHobbyRepository).deleteAllByUserId(testUser.getId());
+        verify(hobbyRepository).findById(999L);
+    }
 
     @Test
     @DisplayName("빈 취미 목록으로 업데이트 시 기존 취미만 삭제한다")
