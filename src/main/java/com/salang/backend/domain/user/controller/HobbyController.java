@@ -1,5 +1,6 @@
 package com.salang.backend.domain.user.controller;
 
+import com.salang.backend.domain.user.docs.HobbyApiDocs;
 import com.salang.backend.domain.user.dto.response.HobbiesResponse;
 import com.salang.backend.domain.user.service.HobbyService;
 import com.salang.backend.global.result.ResultCode;
@@ -14,14 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/hobbies")
 @RequiredArgsConstructor
-public class HobbyController {
+public class HobbyController implements HobbyApiDocs {
 
     private final HobbyService hobbyService;
 
-    @Operation(
-            summary = "취미 카탈로그 조회",
-            description = "모든 취미 목록을 반환합니다."
-    )
     @GetMapping
     public ResponseEntity<ResultResponse> getHobbies(){
         final HobbiesResponse response = hobbyService.getHobbies();

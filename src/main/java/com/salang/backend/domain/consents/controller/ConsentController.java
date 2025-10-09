@@ -1,5 +1,6 @@
 package com.salang.backend.domain.consents.controller;
 
+import com.salang.backend.domain.consents.docs.ConsentApiDocs;
 import com.salang.backend.domain.consents.dto.request.UpdateConsentRequest;
 import com.salang.backend.domain.consents.dto.response.ConsentsResponse;
 import com.salang.backend.domain.consents.service.ConsentService;
@@ -18,24 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/consents")
 @RequiredArgsConstructor
-public class ConsentController {
+public class ConsentController implements ConsentApiDocs {
 
     private final ConsentService consentService;
 
-    @Operation(
-            summary = "약관 동의 여부 확인",
-            description = "내 동의 항목/버전/시각 조회"
-    )
     @GetMapping
     public ResponseEntity<ResultResponse> getConsents() {
         final ConsentsResponse response = consentService.getConsents();
         return ResponseEntity.ok(ResultResponse.of(ResultCode.GET_CONSENTS_SUCCESS, response));
     }
 
-    @Operation(
-            summary = "내 약관 동의/철회",
-            description = "내 약관 동의/철회"
-    )
     @PostMapping
     public ResponseEntity<ResultResponse> saveOrUpdateConsent(@Valid @RequestBody UpdateConsentRequest updateConsentRequest) {
         consentService.saveOrUpdateConsent(updateConsentRequest);
