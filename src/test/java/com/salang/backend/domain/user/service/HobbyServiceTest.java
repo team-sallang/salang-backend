@@ -115,7 +115,8 @@ class HobbyServiceTest {
 
         // when & then
         assertThatThrownBy(() -> hobbyService.updateUserHobbies(testUser, hobbyIds))
-                .isInstanceOf(BusinessException.class);
+                .isInstanceOf(BusinessException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.HOBBY_NOT_FOUND);
         verify(userHobbyRepository).deleteAllByUserId(testUser.getId());
         verify(hobbyRepository).findById(999L);
     }
