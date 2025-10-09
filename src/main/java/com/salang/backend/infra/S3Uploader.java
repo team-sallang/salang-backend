@@ -2,6 +2,7 @@ package com.salang.backend.infra;
 
 import com.salang.backend.global.error.ErrorCode;
 import com.salang.backend.global.error.exception.BadExtensionException;
+import com.salang.backend.global.error.exception.BadFileNameException;
 import com.salang.backend.global.error.exception.S3DeleteException;
 import com.salang.backend.global.error.exception.S3UploadException;
 import java.io.IOException;
@@ -40,6 +41,9 @@ public class S3Uploader {
 
     private String uploadFile(MultipartFile multipartFile) {
         String originalFilename = multipartFile.getOriginalFilename();
+        if (originalFilename == null) {
+            throw new BadFileNameException();
+        }
         String fileName = createFileName(originalFilename);
 
         try (InputStream inputStream = multipartFile.getInputStream()) {
@@ -51,7 +55,7 @@ public class S3Uploader {
 
             s3Client.putObject(putObjectRequest, RequestBody.fromInputStream(inputStream, multipartFile.getSize()));
             return fileName; // S3에서 접근할 키 반환
-        } catch (IOException e) {
+        } catch (IOException | S3Exception e) {
             throw new S3UploadException();
         }
     }

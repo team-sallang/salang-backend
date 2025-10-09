@@ -39,7 +39,8 @@ public class HobbyService {
         List<UserHobby> newUserHobbies = hobbyIds.stream()
                 .map(id -> UserHobby.builder()
                         .user(user)
-                        .hobby(hobbyRepository.getReferenceById(id))
+                        .hobby(hobbyRepository.findById(id)
+                                .orElseThrow(() -> new BusinessException(ErrorCode.HOBBY_NOT_FOUND)))
                         .build())
                 .toList();
         userHobbyRepository.saveAll(newUserHobbies);

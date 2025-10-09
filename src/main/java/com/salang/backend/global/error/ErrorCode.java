@@ -36,10 +36,11 @@ public enum ErrorCode {
     DUPLICATE_HOBBY(400, "H003", "중복된 취미를 등록할 수 없습니다."),
 
     // AWS
-    BAD_EXTENSION(400, "A001" , "허용되지 않은 형식의 파일입니다."),
+    BAD_EXTENSION(400, "A001", "허용되지 않은 형식의 파일입니다."),
     EMPTY_EXTENSION(400, "A002", "파일의 확장자가 없습니다."),
     S3_UPLOAD_FAILED(500, "A003", "S3에 업로드를 실패하였습니다."),
-    S3_DELETE_FAILED(500, "A004", "기존 프로필 이미지 삭제 실패하였습니다.");
+    S3_DELETE_FAILED(500, "A004", "기존 프로필 이미지 삭제 실패하였습니다."),
+    BAD_FILE_NAME(400, "A005", "비어있거나 잘못된 파일 이름입니다.");
 
     private final int status;
     private final String code;

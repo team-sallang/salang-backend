@@ -93,18 +93,19 @@ class HobbyServiceTest {
     void updateUserHobbies_Success() {
         // given
         List<Long> hobbyIds = List.of(1L, 2L);
-        given(hobbyRepository.getReferenceById(1L)).willReturn(testHobby1);
-        given(hobbyRepository.getReferenceById(2L)).willReturn(testHobby2);
+        given(hobbyRepository.findById(1L)).willReturn(java.util.Optional.of(testHobby1));
+        given(hobbyRepository.findById(2L)).willReturn(java.util.Optional.of(testHobby2));
 
         // when
         hobbyService.updateUserHobbies(testUser, hobbyIds);
 
         // then
         verify(userHobbyRepository).deleteAllByUserId(testUser.getId());
-        verify(hobbyRepository).getReferenceById(1L);
-        verify(hobbyRepository).getReferenceById(2L);
+        verify(hobbyRepository).findById(1L);
+        verify(hobbyRepository).findById(2L);
         verify(userHobbyRepository).saveAll(any());
     }
+
 
     @Test
     @DisplayName("빈 취미 목록으로 업데이트 시 기존 취미만 삭제한다")

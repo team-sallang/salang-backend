@@ -5,7 +5,6 @@ import com.salang.backend.domain.user.dto.request.EditRegionAndHobbyRequest;
 import com.salang.backend.global.result.ResultResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.tags.Tags;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;

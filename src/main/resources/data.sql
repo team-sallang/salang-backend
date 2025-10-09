@@ -20,3 +20,10 @@ INSERT INTO hobbies (name, created_at, updated_at, deleted_at) VALUES
 INSERT INTO user_hobbies (user_id, hobby_id, created_at, updated_at, deleted_at) VALUES
 (1, 1, now(), now(), NULL),
 (1, 2, now(), now(), NULL);
+
+-- =========================
+-- 시퀀스 재설정 (중복 키 방지)
+-- =========================
+SELECT setval('users_id_seq', (SELECT MAX(id) FROM users));
+SELECT setval('hobbies_id_seq', (SELECT MAX(id) FROM hobbies));
+SELECT setval('user_hobbies_id_seq', (SELECT MAX(id) FROM user_hobbies));
